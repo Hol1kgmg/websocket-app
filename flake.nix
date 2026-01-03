@@ -72,7 +72,7 @@
                 files = "\\.[jt]sx?$";
               };
               treefmt = {
-                enable = true;
+                enable = false; # oxfmtがtreefmt-nixで使えないため、無効化
                 package = config.treefmt.build.wrapper;
               };
             };
