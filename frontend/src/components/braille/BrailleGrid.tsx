@@ -1,9 +1,40 @@
+"use client";
+
+/**
+ * 点字グリッドコンポーネント
+ * 16×16のグリッドで256個の点字文字を表示
+ */
+
 import type { BrailleGridProps } from "@/types";
+import { BrailleCell } from "./BrailleCell";
 
 export const BrailleGrid = ({
-  data: _data,
+  data,
   selectedDots: _selectedDots,
-  onDotToggle: _onDotToggle,
+  onDotToggleAction: _onDotToggleAction,
 }: BrailleGridProps) => {
-  return <div></div>;
+  return (
+    <div
+      style={{
+        width: "calc(var(--braille-grid-columns) * (var(--braille-cell-size) + var(--braille-gap))",
+      }}
+    >
+      <div
+        className="grid"
+        style={{
+          gridTemplateColumns: "repeat(var(--braille-grid-columns), var(--braille-cell-size))",
+          gap: "var(--braille-gap)",
+        }}
+      >
+        {data.map((brailleChar) => (
+          <BrailleCell
+            key={brailleChar.unicode}
+            dots={brailleChar.dots}
+            isSelected={false}
+            onClickAction={() => {}}
+          />
+        ))}
+      </div>
+    </div>
+  );
 };

@@ -1,9 +1,9 @@
-import { BrailleTable } from "@/components/braille/BrailleTable";
+import { BraillePage } from "@/components/braille/BraillePage";
 
 export default function Home() {
   return (
-    <div className="flex justify-center">
-      <BrailleTable />
+    <div className="min-h-screen">
+      <BraillePage />
     </div>
   );
 }

@@ -15,7 +15,7 @@ export type BrailleCellProps = {
   /** 選択状態 */
   readonly isSelected: boolean;
   /** クリック時のハンドラー */
-  readonly onClick: () => void;
+  readonly onClickAction: () => void;
 };
 
 /**
@@ -28,7 +28,7 @@ export type BrailleGridProps = {
   /** 現在選択されている点の配列 */
   readonly selectedDots: readonly DotNumber[];
   /** 点がトグルされた時のハンドラー */
-  readonly onDotToggle: (dot: DotNumber) => void;
+  readonly onDotToggleAction: (dot: DotNumber) => void;
 };
 
 /**
