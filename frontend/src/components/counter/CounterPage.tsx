@@ -9,6 +9,7 @@
 import { useCounter } from "@/hooks/useCounter";
 import { CounterDisplay } from "./CounterDisplay";
 import { CounterControls } from "./CounterControls";
+import { WebSocketDemo } from "@/components/websocket/WebSocketDemo";
 import { TypographyH1, TypographyLead } from "@/components/ui/typography";
 
 /**
@@ -37,6 +38,12 @@ export const CounterPage = (): React.ReactElement => {
         onDecrement={decrement}
         onReset={reset}
       />
+
+      {/* WebSocket demo */}
+      <section className="w-full max-w-md">
+        <h2 className="mb-4 text-center text-lg font-semibold">WebSocket Demo</h2>
+        <WebSocketDemo />
+      </section>
 
       {/* Pattern reference */}
       <footer className="mt-8 text-center text-xs text-muted-foreground">
