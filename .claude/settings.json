@@ -1,7 +1,4 @@
 {
-  "alwaysThinkingEnabled": true,
-  "enableAllProjectMcpServers": true,
-  "enabledMcpjsonServers": ["nixos"],
   "permissions": {
     "allow": [
       "Bash(git add:*)",
@@ -36,5 +33,12 @@
     ],
     "deny": [],
     "ask": []
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+  ],
+  "alwaysThinkingEnabled": true,
+  "enabledPlugins": {
+    "example-skills@anthropic-agent-skills": true
   }
 }
