@@ -1,6 +1,17 @@
-# braille-finder
+# Static Web App Template
 
-Visual braille Unicode search tool with 256-character pattern matching
+A template for building static web applications with Next.js, React 19, TypeScript, Jotai, and Tailwind CSS.
+
+## Tech Stack
+
+| Category | Technology |
+|----------|------------|
+| **Framework** | Next.js 16 (App Router, Static Export) |
+| **Language** | TypeScript 5 |
+| **UI Library** | React 19 |
+| **State Management** | Jotai |
+| **Styling** | Tailwind CSS v4 |
+| **Error Handling** | @praha/byethrow (Result type) |
 
 ## Prerequisites
 
@@ -17,21 +28,23 @@ Visual braille Unicode search tool with 256-character pattern matching
   ```
 
 ## Setup
+Development environment with flake.nix and ni.
+[antfu-collective/ni](https://github.com/antfu-collective/ni)
 
 ```bash
 # Clone repository
-git clone https://github.com/Hol1kgmg/braille-finder.git
-cd braille-finder
+git clone <repository-url>
+cd <repository-name>
 
 # Enter Nix development environment (installs all tools automatically)
 nix develop
 
 # Install dependencies
 cd frontend
-npm install
+ni
 
 # Start development server
-npm run dev
+nr dev
 ```
 
 The app will be available at http://localhost:3000/
@@ -48,16 +61,22 @@ nix develop
 nix develop
 ```
 
-### Linting
+### Linting & Formatting
 
 ```bash
 cd frontend
 
 # Run linter
-oxlint
+nr lint
 
-# Auto-fix issues
-oxlint --fix
+# Auto-fix lint issues
+nr lint:fix
+
+# Run formatter
+nr format
+
+# Check format only
+nr format:check
 ```
 
 ### Pre-commit Hooks
@@ -77,14 +96,81 @@ Hooks are automatically installed when you run `nix develop`.
 - **TypeScript** - Type checking
 - **Git** - Version control
 
-### Project Structure
+## Project Structure
 
 ```
-frontend/
-├── src/
-│   └── app/          # Next.js App Router
-│       ├── layout.tsx
-│       ├── page.tsx
-│       └── globals.css
-└── public/           # Static assets
+frontend/src/
+├── app/                    # Next.js App Router
+│   ├── layout.tsx          # Root layout with metadata
+│   ├── page.tsx            # Entry page
+│   └── globals.css         # CSS variables & base styles
+├── atoms/                  # Jotai state management
+│   └── {domain}.ts         # Domain-specific atoms
+├── components/
+│   ├── ui/                 # Reusable UI components
+│   └── {domain}/           # Domain-specific components
+├── hooks/                  # Custom React hooks
+│   └── use{Domain}.ts      # State access hooks
+├── lib/                    # Business logic & utilities
+│   ├── {domain}.ts         # Domain logic (pure functions)
+│   └── utils.ts            # Generic utilities
+└── types/                  # Type definitions
+    ├── index.ts            # Centralized exports
+    ├── {domain}.ts         # Domain types
+    └── components.ts       # Component prop types
 ```
+
+## Patterns & Skills
+
+Each file includes pattern comments referencing the skill used:
+
+```typescript
+// Pattern: {skill-name} - {description}
+```
+
+### Skills Reference
+
+| Skill | Purpose |
+|-------|---------|
+| **jotai-state** | Atom design patterns (primitive, write-only, derived) |
+| **tailwind-theming** | CSS variables & dark mode |
+| **static-webapp-scaffold** | Directory structure & separation of concerns |
+| **typescript-patterns** | Branded types, type guards, exhaustiveness |
+| **byethrow** | Result type error handling |
+| **frontend-design** | Clean, accessible UI |
+
+## Using This Template
+
+To create a new app from this template:
+
+1. **Rename files**:
+   - `atoms/counter.ts` → `atoms/{domain}.ts`
+   - `components/counter/` → `components/{domain}/`
+   - `hooks/useCounter.ts` → `hooks/use{Domain}.ts`
+   - `lib/counter.ts` → `lib/{domain}.ts`
+   - `types/counter.ts` → `types/{domain}.ts`
+
+2. **Update types** in `types/`:
+   - Create domain-specific branded types
+   - Update component props
+   - Update `types/index.ts` exports
+
+3. **Update CSS variables** in `globals.css`:
+   - Replace `--counter-*` with `--{domain}-*`
+
+4. **Update Tailwind config** in `tailwind.config.ts`:
+   - Replace `counter` color mappings with `{domain}`
+
+## Deployment
+
+Built for Cloudflare Pages (static export):
+
+```bash
+cd frontend
+nr build
+# Output: frontend/out/
+```
+
+## License
+
+MIT

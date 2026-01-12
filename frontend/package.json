@@ -14,13 +14,16 @@
   "dependencies": {
     "@praha/byethrow": "^0.9.0",
     "@radix-ui/react-slot": "^1.2.4",
+    "build": "^0.1.4",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "format": "^0.2.2",
     "jotai": "^2.16.1",
     "lucide-react": "^0.562.0",
     "next": "16.1.1",
     "react": "19.2.3",
     "react-dom": "19.2.3",
+    "run": "^1.5.0",
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.4.0",
     "tailwindcss-animate": "^1.0.7"

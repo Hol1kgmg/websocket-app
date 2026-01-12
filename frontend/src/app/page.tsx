@@ -1,9 +1,10 @@
-import { BraillePage } from "@/components/braille/BraillePage";
+/**
+ * Home page entry point
+ * Pattern: static-webapp-scaffold - Next.js App Router page
+ */
 
-export default function Home() {
-  return (
-    <div className="min-h-screen">
-      <BraillePage />
-    </div>
-  );
+import { CounterPage } from "@/components/counter/CounterPage";
+
+export default function Home(): React.ReactElement {
+  return <CounterPage />;
 }

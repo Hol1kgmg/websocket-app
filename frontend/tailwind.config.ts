@@ -1,6 +1,12 @@
+/**
+ * Tailwind CSS Configuration
+ * Pattern: tailwind-theming - CSS variables integration
+ */
+
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  // Pattern: tailwind-theming - System preference detection
   darkMode: "media",
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -11,6 +17,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // Semantic color tokens
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
@@ -51,23 +58,13 @@ const config: Config = {
           "4": "hsl(var(--chart-4))",
           "5": "hsl(var(--chart-5))",
         },
-        braille: {
-          cell: {
-            bg: "hsl(var(--braille-cell-bg))",
-            border: "hsl(var(--braille-cell-border))",
-            "hover-bg": "hsl(var(--braille-cell-hover-bg))",
-            "hover-border": "hsl(var(--braille-cell-hover-border))",
-          },
-          dot: {
-            on: "hsl(var(--braille-dot-on))",
-            off: "hsl(var(--braille-dot-off))",
-          },
-          match: {
-            "exact-bg": "hsl(var(--braille-match-exact-bg))",
-            "exact-border": "hsl(var(--braille-match-exact-border))",
-            "none-bg": "hsl(var(--braille-match-none-bg))",
-            "none-border": "hsl(var(--braille-match-none-border))",
-          },
+        // Pattern: tailwind-theming - Domain-specific color tokens
+        counter: {
+          display: "hsl(var(--counter-display))",
+          "display-foreground": "hsl(var(--counter-display-foreground))",
+          border: "hsl(var(--counter-border))",
+          positive: "hsl(var(--counter-positive))",
+          negative: "hsl(var(--counter-negative))",
         },
       },
       borderRadius: {
@@ -75,11 +72,9 @@ const config: Config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
-      gridTemplateColumns: {
-        "var(--braille-grid-columns)": "repeat(var(--braille-grid-columns), minmax(0, 1fr))",
-      },
     },
   },
   plugins: [require("tailwindcss-animate")],
 };
+
 export default config;

@@ -1,21 +1,11 @@
 /**
- * 型定義の統合エクスポート
- * プロジェクト全体で使用する型定義を一元管理
+ * Centralized type exports
+ * Pattern: static-webapp-scaffold - Single source of truth for types
  */
 
-// 点字関連の型
-export type {
-  DotNumber,
-  BitPosition,
-  BrailleUnicode,
-  BinaryPattern,
-  MatchResult,
-  BrailleCharacter,
-  BitToDotMap,
-} from "./braille";
+// Counter domain types
+export type { CountValue } from "./counter";
+export { isCountValue, createCountValue } from "./counter";
 
-// コンポーネントProps型
-export type { BrailleCellProps, BrailleGridProps, BraillePatternSelectorProps } from "./components";
-
-// Atom関連の型
-export type { FilteredBrailleCharacter } from "./atoms";
+// Component Props types
+export type { CounterDisplayProps, CounterControlsProps } from "./components";

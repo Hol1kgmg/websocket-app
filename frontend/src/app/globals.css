@@ -2,8 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * Pattern: tailwind-theming - CSS custom properties for theming
+ * HSL values without hsl() wrapper for opacity support
+ */
 @layer base {
   :root {
+    /* Semantic color tokens */
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
@@ -28,27 +33,24 @@
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    /* 環境変数 */
+
+    /* Layout variables */
     --radius: 0.5rem;
-    --braille-cell-size: 3rem;
-    --braille-gap: 0.5rem;
-    --braille-grid-columns: 16;
-    /* 点字セル専用カラー */
-    --braille-cell-bg: 0 0% 100%;
-    --braille-cell-border: 0 0% 82%;
-    --braille-cell-hover-bg: 221 83% 95%;
-    --braille-cell-hover-border: 221 83% 63%;
-    --braille-dot-on: 221 83% 53%;
-    --braille-dot-off: 0 0% 90%;
-    /* マッチ結果用カラー */
-    --braille-match-exact-bg: 134 61% 90%;
-    --braille-match-exact-border: 134 61% 60%;
-    --braille-match-none-bg: 0 0% 82%;
-    --braille-match-none-border: 0 0% 73%;
+
+    /* Pattern: tailwind-theming - Domain-specific color tokens */
+    /* Counter display colors */
+    --counter-display: 0 0% 98%;
+    --counter-display-foreground: 0 0% 9%;
+    --counter-border: 0 0% 82%;
+    /* Counter state colors */
+    --counter-positive: 142 76% 36%;
+    --counter-negative: 0 84% 60%;
   }
 
+  /* Pattern: tailwind-theming - Dark mode via prefers-color-scheme */
   @media (prefers-color-scheme: dark) {
     :root {
+      /* Semantic color tokens (dark) */
       --background: 0 0% 3.9%;
       --foreground: 0 0% 98%;
       --card: 0 0% 3.9%;
@@ -73,18 +75,14 @@
       --chart-3: 30 80% 55%;
       --chart-4: 280 65% 60%;
       --chart-5: 340 75% 55%;
-      /* 点字セル専用カラー（ダークモード） */
-      --braille-cell-bg: 0 0% 10%;
-      --braille-cell-border: 0 0% 25%;
-      --braille-cell-hover-bg: 221 40% 20%;
-      --braille-cell-hover-border: 221 83% 70%;
-      --braille-dot-on: 221 83% 70%;
-      --braille-dot-off: 0 0% 30%;
-      /* マッチ結果用カラー（ダークモード） */
-      --braille-match-exact-bg: 134 30% 15%;
-      --braille-match-exact-border: 134 40% 40%;
-      --braille-match-none-bg: 0 0% 12%;
-      --braille-match-none-border: 0 0% 20%;
+
+      /* Counter display colors (dark) */
+      --counter-display: 0 0% 12%;
+      --counter-display-foreground: 0 0% 98%;
+      --counter-border: 0 0% 25%;
+      /* Counter state colors (dark) */
+      --counter-positive: 142 70% 45%;
+      --counter-negative: 0 70% 50%;
     }
   }
 }

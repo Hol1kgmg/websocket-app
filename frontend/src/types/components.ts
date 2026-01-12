@@ -1,41 +1,32 @@
 /**
- * コンポーネントProps型定義
- * 各Reactコンポーネントの型安全なProps定義
+ * Component Props type definitions
+ * Pattern: static-webapp-scaffold - Centralized component types
  */
 
-import type { DotNumber, MatchResult, FilteredBrailleCharacter } from "./";
+import type { CountValue } from "./counter";
 
 /**
- * BrailleCellコンポーネントのProps
- * 個別の点字セルを表示するコンポーネント
+ * CounterDisplay component Props
+ * Pattern: typescript-patterns - readonly Props for immutability
  */
-export type BrailleCellProps = {
-  /** 点字文字 */
-  readonly char: string;
-  /** 表示する点の番号配列 */
-  readonly dots: readonly DotNumber[];
-  /** マッチ結果（フィルタリング時） */
-  readonly matchResult?: MatchResult;
+export type CounterDisplayProps = {
+  /** Current counter value */
+  readonly count: CountValue;
+  /** Doubled value (derived) */
+  readonly doubled: number;
+  /** Whether count is positive (derived) */
+  readonly isPositive: boolean;
 };
 
 /**
- * BrailleGridコンポーネントのProps
- * 点字グリッドを表示するコンポーネント
+ * CounterControls component Props
+ * Pattern: static-webapp-scaffold - Presentational component with callbacks
  */
-export type BrailleGridProps = {
-  /** 表示する点字文字データの配列（フィルタリング済み） */
-  readonly data: readonly FilteredBrailleCharacter[];
-};
-
-/**
- * BraillePatternSelectorコンポーネントのProps
- * 検索パターン選択UI
- */
-export type BraillePatternSelectorProps = {
-  /** 現在選択されている点の配列 */
-  readonly selectedDots: readonly DotNumber[];
-  /** 点がクリックされた時のハンドラー */
-  readonly onDotClickAction: (dot: DotNumber) => void;
-  /** 選択クリアボタンのハンドラー */
-  readonly onClearAction: () => void;
+export type CounterControlsProps = {
+  /** Increment handler */
+  readonly onIncrement: () => void;
+  /** Decrement handler */
+  readonly onDecrement: () => void;
+  /** Reset handler */
+  readonly onReset: () => void;
 };
