@@ -76,27 +76,17 @@ export const isPositive = (count: CountValue): boolean => {
  * }
  */
 export const parseCountInput = (input: string): Result.Result<CountValue, Error> => {
-  return Result.try({
-    try: (): CountValue => {
-      const trimmed = input.trim();
-      if (trimmed === "") {
-        throw new Error("Input cannot be empty");
-      }
+  const trimmed = input.trim();
+  if (trimmed === "") {
+    return Result.fail(new Error("Input cannot be empty"));
+  }
 
-      const num = Number(trimmed);
-      if (!Number.isFinite(num)) {
-        throw new Error(`Invalid number: "${input}"`);
-      }
+  const num = Number(trimmed);
+  if (!Number.isFinite(num)) {
+    return Result.fail(new Error(`Invalid number: "${input}"`));
+  }
 
-      return createCountValue(num);
-    },
-    catch: (error): Error => {
-      if (error instanceof Error) {
-        return error;
-      }
-      return new Error(`Failed to parse input: ${String(error)}`);
-    },
-  });
+  return Result.succeed(createCountValue(num));
 };
 
 /**

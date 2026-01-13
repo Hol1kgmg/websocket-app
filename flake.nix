@@ -51,9 +51,7 @@
       perSystem =
         {
           config,
-          lib,
           pkgs,
-          system,
           ...
         }:
         {
