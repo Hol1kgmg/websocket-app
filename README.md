@@ -45,6 +45,9 @@ ni
 
 # Start development server
 nr dev
+
+## Start PartyKit
+npx partykit dev
 ```
 
 The app will be available at http://localhost:3000/
