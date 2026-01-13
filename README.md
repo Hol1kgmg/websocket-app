@@ -2,16 +2,18 @@
 
 A template for building static web applications with Next.js, React 19, TypeScript, Jotai, and Tailwind CSS.
 
+<img src="./assets/partykit-template-screenshot.png" alt="web-appのスクリーンショット" height="400">
+
 ## Tech Stack
 
-| Category | Technology |
-|----------|------------|
-| **Framework** | Next.js 16 (App Router, Static Export) |
-| **Language** | TypeScript 5 |
-| **UI Library** | React 19 |
-| **State Management** | Jotai |
-| **Styling** | Tailwind CSS v4 |
-| **Error Handling** | @praha/byethrow (Result type) |
+| Category             | Technology                             |
+| -------------------- | -------------------------------------- |
+| **Framework**        | Next.js 16 (App Router, Static Export) |
+| **Language**         | TypeScript 5                           |
+| **UI Library**       | React 19                               |
+| **State Management** | Jotai                                  |
+| **Styling**          | Tailwind CSS v4                        |
+| **Error Handling**   | @praha/byethrow (Result type)          |
 
 ## Prerequisites
 
@@ -28,6 +30,7 @@ A template for building static web applications with Next.js, React 19, TypeScri
   ```
 
 ## Setup
+
 Development environment with flake.nix and ni.
 [antfu-collective/ni](https://github.com/antfu-collective/ni)
 
@@ -133,20 +136,21 @@ Each file includes pattern comments referencing the skill used:
 
 ### Skills Reference
 
-| Skill | Purpose |
-|-------|---------|
-| **jotai-state** | Atom design patterns (primitive, write-only, derived) |
-| **tailwind-theming** | CSS variables & dark mode |
-| **static-webapp-scaffold** | Directory structure & separation of concerns |
-| **typescript-patterns** | Branded types, type guards, exhaustiveness |
-| **byethrow** | Result type error handling |
-| **frontend-design** | Clean, accessible UI |
+| Skill                      | Purpose                                               |
+| -------------------------- | ----------------------------------------------------- |
+| **jotai-state**            | Atom design patterns (primitive, write-only, derived) |
+| **tailwind-theming**       | CSS variables & dark mode                             |
+| **static-webapp-scaffold** | Directory structure & separation of concerns          |
+| **typescript-patterns**    | Branded types, type guards, exhaustiveness            |
+| **byethrow**               | Result type error handling                            |
+| **frontend-design**        | Clean, accessible UI                                  |
 
 ## Using This Template
 
 To create a new app from this template:
 
 1. **Rename files**:
+
    - `atoms/counter.ts` → `atoms/{domain}.ts`
    - `components/counter/` → `components/{domain}/`
    - `hooks/useCounter.ts` → `hooks/use{Domain}.ts`
@@ -154,11 +158,13 @@ To create a new app from this template:
    - `types/counter.ts` → `types/{domain}.ts`
 
 2. **Update types** in `types/`:
+
    - Create domain-specific branded types
    - Update component props
    - Update `types/index.ts` exports
 
 3. **Update CSS variables** in `globals.css`:
+
    - Replace `--counter-*` with `--{domain}-*`
 
 4. **Update Tailwind config** in `tailwind.config.ts`:
