@@ -1,7 +1,6 @@
----
-name: static-webapp-scaffold
-description: Project structure template for Next.js + React 19 + TypeScript + Tailwind CSS static web applications. Covers directory organization, separation of concerns, and configuration setup. Use when creating new projects, designing directory structure, or setting up static export. Combines with jotai-state, tailwind-theming, frontend-design, and byethrow skills.
----
+______________________________________________________________________
+
+## name: static-webapp-scaffold description: Project structure template for Next.js + React 19 + TypeScript + Tailwind CSS static web applications. Covers directory organization, separation of concerns, and configuration setup. Use when creating new projects, designing directory structure, or setting up static export. Combines with jotai-state, tailwind-theming, frontend-design, and byethrow skills.
 
 This skill guides creation of well-structured static web applications with clear separation of concerns. Designed for Cloudflare Pages or similar static hosting.
 
@@ -43,6 +42,7 @@ frontend/
 ## Configuration Templates
 
 ### next.config.ts
+
 ```typescript
 import type { NextConfig } from "next";
 
@@ -55,6 +55,7 @@ export default nextConfig;
 ```
 
 ### Centralized Type Exports
+
 ```typescript
 // types/index.ts
 export type { DomainType, OtherType } from "./domain";
@@ -83,6 +84,7 @@ export type { ComponentProps } from "./components";
 ## Anti-Patterns
 
 **BAD**: Mixing business logic with components
+
 ```typescript
 // components/UserCard.tsx
 const UserCard = ({ userId }) => {
@@ -91,6 +93,7 @@ const UserCard = ({ userId }) => {
 ```
 
 **GOOD**: Logic in lib, access via hooks
+
 ```typescript
 // lib/user.ts
 export const calculateUserScore = (user: User): number => { ... };
@@ -103,6 +106,7 @@ export const useUser = () => {
 ```
 
 **BAD**: Types scattered across files
+
 ```typescript
 // Imports from multiple locations
 import { User } from "./components/UserCard";
@@ -110,12 +114,14 @@ import { Score } from "./lib/scoring";
 ```
 
 **GOOD**: Centralized type exports
+
 ```typescript
 // Single import source
 import type { User, Score } from "@/types";
 ```
 
 **BAD**: Domain logic in atoms
+
 ```typescript
 export const userAtom = atom((get) => {
   // Complex computation here
@@ -123,6 +129,7 @@ export const userAtom = atom((get) => {
 ```
 
 **GOOD**: Atoms call lib functions
+
 ```typescript
 export const userAtom = atom((get) => {
   return computeUser(get(rawDataAtom)); // Logic in lib/

@@ -13,23 +13,23 @@ Visual braille Unicode search tool with 256-character pattern matching, built wi
 
 ## Available Rules
 
-| Rule                    | Applies To | Description                                    |
+| Rule | Applies To | Description |
 | ----------------------- | ---------- | ---------------------------------------------- |
-| **typescript-patterns** | `**/*.ts`  | TypeScript coding patterns and conventions     |
+| **typescript-patterns** | `**/*.ts` | TypeScript coding patterns and conventions |
 
 _Note: Rules will be added as the project evolves._
 
 ## Available Skills
 
-| Skill                | When to Use                                    |
+| Skill | When to Use |
 | -------------------- | ---------------------------------------------- |
-| **frontend-design**  | Building web components, pages, or applications with distinctive, production-grade design |
+| **frontend-design** | Building web components, pages, or applications with distinctive, production-grade design |
 
 ## Work Rules
 
 1. Propose implementation plan
-2. Wait for approval
-3. Start implementation
+1. Wait for approval
+1. Start implementation
 
 ## Tool Usage Policy
 

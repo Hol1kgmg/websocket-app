@@ -1,7 +1,6 @@
----
-name: jotai-state
-description: Lightweight state management patterns using Jotai atoms. Covers primitive atoms, derived atoms, write-only atoms, and custom hooks for state access. Use when designing React state management, introducing Jotai, or architecting global state.
----
+______________________________________________________________________
+
+## name: jotai-state description: Lightweight state management patterns using Jotai atoms. Covers primitive atoms, derived atoms, write-only atoms, and custom hooks for state access. Use when designing React state management, introducing Jotai, or architecting global state.
 
 This skill guides creation of scalable, type-safe state management using Jotai's atomic model. Implement minimal re-renders through granular subscriptions.
 
@@ -70,23 +69,27 @@ src/
 ## Anti-Patterns
 
 **BAD**: Direct atom manipulation in components
+
 ```typescript
 const [items, setItems] = useAtom(selectedItemsAtom);
 setItems([...items, newItem]); // Logic scattered across components
 ```
 
 **GOOD**: Operations through write-only atoms
+
 ```typescript
 const toggleItem = useSetAtom(toggleItemAtom);
 toggleItem(newItem); // Logic centralized in atom
 ```
 
 **BAD**: Storing derived state as primitive atom
+
 ```typescript
 const filteredAtom = atom<Item[]>([]); // Manually updated
 ```
 
 **GOOD**: Using derived atom for computed values
+
 ```typescript
 const filteredAtom = atom((get) => computeFiltered(get(sourceAtom)));
 ```

@@ -101,6 +101,7 @@
             # [カスタマイズ] treefmtで使用するフォーマッターを選択
             programs = {
               nixfmt.enable = true;
+              mdformat.enable = true;
             };
           };
         };

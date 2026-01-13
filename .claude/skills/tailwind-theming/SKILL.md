@@ -1,7 +1,6 @@
----
-name: tailwind-theming
-description: CSS custom properties (variables) management with Tailwind CSS for light/dark mode theming. Covers HSL color system, semantic color tokens, system preference detection via prefers-color-scheme. Use when setting up theming, implementing dark mode, or managing design tokens.
----
+______________________________________________________________________
+
+## name: tailwind-theming description: CSS custom properties (variables) management with Tailwind CSS for light/dark mode theming. Covers HSL color system, semantic color tokens, system preference detection via prefers-color-scheme. Use when setting up theming, implementing dark mode, or managing design tokens.
 
 This skill guides implementation of a robust theming system using CSS custom properties with Tailwind CSS. Automatically adapts to system light/dark mode preferences.
 
@@ -105,43 +104,51 @@ const config: Config = {
 ## Anti-Patterns
 
 **BAD**: Hardcoded colors in components
+
 ```typescript
 <div className="bg-[#1a1a1a] text-[#ffffff]">
 ```
 
 **GOOD**: Semantic tokens via CSS variables
+
 ```typescript
 <div className="bg-background text-foreground">
 ```
 
 **BAD**: Color names as tokens
+
 ```css
 --blue-500: 221 83% 53%;
 --dark-gray: 0 0% 20%;
 ```
 
 **GOOD**: Role-based semantic tokens
+
 ```css
 --primary: 221 83% 53%;
 --muted: 0 0% 20%;
 ```
 
 **BAD**: Separate dark mode classes
+
 ```typescript
 <div className="bg-white dark:bg-gray-900">
 ```
 
 **GOOD**: Single class with CSS variable adaptation
+
 ```typescript
 <div className="bg-background"> /* Adapts automatically */
 ```
 
 **BAD**: Including hsl() in variable value
+
 ```css
 --primary: hsl(221 83% 53%); /* Cannot manipulate opacity */
 ```
 
 **GOOD**: Raw HSL values for opacity support
+
 ```css
 --primary: 221 83% 53%;
 /* Usage: hsl(var(--primary)) or hsl(var(--primary) / 0.5) */

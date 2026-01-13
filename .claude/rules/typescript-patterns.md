@@ -1,9 +1,6 @@
----
-description: Use when writing or reviewing TypeScript/React code. Covers Branded Types, immutability, type safety, exhaustiveness checks, avoiding any/non-null assertions, React/Next.js patterns. (project)
-alwaysApply: false
-paths: "**/*.ts,**/*.tsx"
-globs: "*.ts,*.tsx"
----
+______________________________________________________________________
+
+## description: Use when writing or reviewing TypeScript/React code. Covers Branded Types, immutability, type safety, exhaustiveness checks, avoiding any/non-null assertions, React/Next.js patterns. (project) alwaysApply: false paths: "**/\*.ts,**/*.tsx" globs: "*.ts,\*.tsx"
 
 # TypeScript/React Patterns and Best Practices
 
@@ -37,6 +34,7 @@ export const isBitPosition = (value: number): value is BitPosition => {
 ```
 
 **Benefits**:
+
 - Prevents mixing incompatible types at compile time
 - Guarantees value validity through factory functions
 - Runtime validation with type guards
@@ -65,6 +63,7 @@ function getClassName(result: MatchResult): string {
 ```
 
 **Benefits**:
+
 - Adding a new union member will trigger a compile-time error
 - Keeps union definition and switch statement in sync automatically
 - No temporary variables needed
@@ -75,6 +74,7 @@ function getClassName(result: MatchResult): string {
 Always use specific types instead of `any` when possible.
 
 **Bad**:
+
 ```typescript
 function processData(data: any): any {
   return data.value;
@@ -82,6 +82,7 @@ function processData(data: any): any {
 ```
 
 **Good**:
+
 ```typescript
 // Using generics
 function processData<T extends { value: U }, U>(data: T): U {
@@ -98,6 +99,7 @@ function processData(data: unknown): unknown {
 ```
 
 **Alternatives to `any`**:
+
 - Use `unknown` when type is truly not known, then narrow with type guards
 - Use `Record<string, unknown>` for objects with unknown property values
 - Use union types to represent multiple possible types
@@ -108,6 +110,7 @@ function processData(data: unknown): unknown {
 Never use non-null assertions. Instead, use proper null checking.
 
 **Bad**:
+
 ```typescript
 function getConfig(configMap: Map<string, Config>): Config {
   const config = configMap.get('default');
@@ -116,6 +119,7 @@ function getConfig(configMap: Map<string, Config>): Config {
 ```
 
 **Good**:
+
 ```typescript
 // Explicit null check
 function getConfig(configMap: Map<string, Config>): Config {
@@ -137,6 +141,7 @@ function getConfig(configMap: Map<string, Config>): Config {
 Always specify return types for functions.
 
 **Bad**:
+
 ```typescript
 const calculateTotal = (items: Item[]) => {
   return items.reduce((sum, item) => sum + item.price, 0);
@@ -144,6 +149,7 @@ const calculateTotal = (items: Item[]) => {
 ```
 
 **Good**:
+
 ```typescript
 const calculateTotal = (items: Item[]): number => {
   return items.reduce((sum, item) => sum + item.price, 0);
@@ -183,6 +189,7 @@ export const getDots = (value: BinaryPattern): readonly DotNumber[] => {
 Create new variables instead of reassigning function parameters.
 
 **Bad**:
+
 ```typescript
 function mergeOptions(options: Options, overrides?: Options): Options {
   options = { ...options, ...overrides }; // Reassignment
@@ -191,6 +198,7 @@ function mergeOptions(options: Options, overrides?: Options): Options {
 ```
 
 **Good**:
+
 ```typescript
 function mergeOptions(options: Options, overrides?: Options): Options {
   const mergedOptions = { ...options, ...overrides };
@@ -203,6 +211,7 @@ function mergeOptions(options: Options, overrides?: Options): Options {
 Use proper type-safe methods to remove properties instead of setting to `undefined` or using `delete`.
 
 **Bad**:
+
 ```typescript
 function removeProperty(obj: Record<string, JSONSchema7Definition>): void {
   obj['propertyToRemove'] = undefined; // Type error!
@@ -210,6 +219,7 @@ function removeProperty(obj: Record<string, JSONSchema7Definition>): void {
 ```
 
 **Good - Destructuring (Immutable)**:
+
 ```typescript
 function removeProperty(obj: Record<string, JSONSchema7Definition>): Record<string, JSONSchema7Definition> {
   const { propertyToRemove, ...rest } = obj;
@@ -218,6 +228,7 @@ function removeProperty(obj: Record<string, JSONSchema7Definition>): Record<stri
 ```
 
 **Good - Delete (In-place)**:
+
 ```typescript
 function removeProperty(obj: Record<string, JSONSchema7Definition>): void {
   delete obj['propertyToRemove'];
@@ -263,6 +274,7 @@ import { generateBrailleData } from "@/lib/braille";
 - Avoid classes with only static members
 
 **Bad - Class with Only Static Members**:
+
 ```typescript
 export class Utils {
   public static formatDate(date: Date): string {
@@ -272,6 +284,7 @@ export class Utils {
 ```
 
 **Good - Simple Exports**:
+
 ```typescript
 export const formatDate = (date: Date): string => {
   return date.toISOString();
@@ -283,6 +296,7 @@ export const parseDate = (dateStr: string): Date => {
 ```
 
 **Centralized Type Exports**:
+
 ```typescript
 // types/index.ts
 export type {
@@ -344,6 +358,7 @@ export const BrailleCell = ({
 ### Remove Unused Code
 
 After refactoring, always remove unused code:
+
 - Delete unused variables, parameters, functions, classes, imports
 - Don't comment out old code - delete it (git history preserves it)
 - Remove unreachable code paths
@@ -529,12 +544,12 @@ frontend/src/
 ## Quick Reference
 
 1. **Branded Types**: Prevent primitive type misuse
-2. **`satisfies never`**: Exhaustiveness checking for union type switches
-3. **`unknown` over `any`**: Narrow with type guards
-4. **`?.` and `??`**: Use instead of non-null assertions
-5. **Explicit return types**: Specify for all functions
-6. **`readonly`**: Use aggressively for Props, arrays, return values
-7. **Destructuring**: Use for property removal
-8. **Simple exports**: Avoid classes with only static members
-9. **No parameter reassignment**: Create new variables
-10. **Remove unused code**: Always after refactoring
+1. **`satisfies never`**: Exhaustiveness checking for union type switches
+1. **`unknown` over `any`**: Narrow with type guards
+1. **`?.` and `??`**: Use instead of non-null assertions
+1. **Explicit return types**: Specify for all functions
+1. **`readonly`**: Use aggressively for Props, arrays, return values
+1. **Destructuring**: Use for property removal
+1. **Simple exports**: Avoid classes with only static members
+1. **No parameter reassignment**: Create new variables
+1. **Remove unused code**: Always after refactoring

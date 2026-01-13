@@ -6,14 +6,14 @@ A template for building static web applications with Next.js, React 19, TypeScri
 
 ## Tech Stack
 
-| Category             | Technology                             |
+| Category | Technology |
 | -------------------- | -------------------------------------- |
-| **Framework**        | Next.js 16 (App Router, Static Export) |
-| **Language**         | TypeScript 5                           |
-| **UI Library**       | React 19                               |
-| **State Management** | Jotai                                  |
-| **Styling**          | Tailwind CSS v4                        |
-| **Error Handling**   | @praha/byethrow (Result type)          |
+| **Framework** | Next.js 16 (App Router, Static Export) |
+| **Language** | TypeScript 5 |
+| **UI Library** | React 19 |
+| **State Management** | Jotai |
+| **Styling** | Tailwind CSS v4 |
+| **Error Handling** | @praha/byethrow (Result type) |
 
 ## Prerequisites
 
@@ -78,11 +78,15 @@ nr lint
 # Auto-fix lint issues
 nr lint:fix
 
-# Run formatter
+# Run formatter (JS/TS)
 nr format
 
 # Check format only
 nr format:check
+
+# Format Nix/Markdown files (run from project root)
+cd ..
+nix fmt
 ```
 
 ### Pre-commit Hooks
@@ -90,15 +94,17 @@ nr format:check
 This project uses automated pre-commit hooks for code quality:
 
 - **nil** - Nix file linting
-- **oxlint** - JavaScript/TypeScript linting
-- **treefmt** - Auto-formatting (nixfmt, prettier)
+- **oxlint** - JavaScript/TypeScript linting with auto-fix
+- **oxfmt** - JavaScript/TypeScript formatting
 
 Hooks are automatically installed when you run `nix develop`.
 
 ### Tools managed by Nix
 
-- **Node.js 20** - JavaScript runtime
+- **Node.js 24** - JavaScript runtime
 - **oxlint** - Fast JavaScript/TypeScript linter
+- **oxfmt** - Fast JavaScript/TypeScript formatter
+- **mdformat** - Markdown formatter (via treefmt)
 - **TypeScript** - Type checking
 - **Git** - Version control
 
@@ -136,14 +142,14 @@ Each file includes pattern comments referencing the skill used:
 
 ### Skills Reference
 
-| Skill                      | Purpose                                               |
+| Skill | Purpose |
 | -------------------------- | ----------------------------------------------------- |
-| **jotai-state**            | Atom design patterns (primitive, write-only, derived) |
-| **tailwind-theming**       | CSS variables & dark mode                             |
-| **static-webapp-scaffold** | Directory structure & separation of concerns          |
-| **typescript-patterns**    | Branded types, type guards, exhaustiveness            |
-| **byethrow**               | Result type error handling                            |
-| **frontend-design**        | Clean, accessible UI                                  |
+| **jotai-state** | Atom design patterns (primitive, write-only, derived) |
+| **tailwind-theming** | CSS variables & dark mode |
+| **static-webapp-scaffold** | Directory structure & separation of concerns |
+| **typescript-patterns** | Branded types, type guards, exhaustiveness |
+| **byethrow** | Result type error handling |
+| **frontend-design** | Clean, accessible UI |
 
 ## Using This Template
 
@@ -157,17 +163,18 @@ To create a new app from this template:
    - `lib/counter.ts` → `lib/{domain}.ts`
    - `types/counter.ts` → `types/{domain}.ts`
 
-2. **Update types** in `types/`:
+1. **Update types** in `types/`:
 
    - Create domain-specific branded types
    - Update component props
    - Update `types/index.ts` exports
 
-3. **Update CSS variables** in `globals.css`:
+1. **Update CSS variables** in `globals.css`:
 
    - Replace `--counter-*` with `--{domain}-*`
 
-4. **Update Tailwind config** in `tailwind.config.ts`:
+1. **Update Tailwind config** in `tailwind.config.ts`:
+
    - Replace `counter` color mappings with `{domain}`
 
 ## Deployment
