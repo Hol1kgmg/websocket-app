@@ -4,12 +4,8 @@
  */
 
 // Counter domain types
-export type { CountValue } from "./counter";
-export { isCountValue, createCountValue } from "./counter";
-
-// WebSocket domain types
-export type { ConnectionStatus, WebSocketMessage, WebSocketConfig } from "./websocket";
-export { isConnectionStatus } from "./websocket";
+export type { CountValue, CounterAction, CounterSync, CounterMessage, ConnectionStatus } from "./counter";
+export { isCountValue, createCountValue, isCounterSync, isConnectionStatus } from "./counter";
 
 // Component Props types
 export type { CounterDisplayProps, CounterControlsProps } from "./components";

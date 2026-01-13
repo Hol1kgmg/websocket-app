@@ -29,4 +29,6 @@ export type CounterControlsProps = {
   readonly onDecrement: () => void;
   /** Reset handler */
   readonly onReset: () => void;
+  /** Disable all controls (when disconnected) */
+  readonly disabled?: boolean;
 };

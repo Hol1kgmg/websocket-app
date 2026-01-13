@@ -15,6 +15,7 @@ export const CounterControls = ({
   onIncrement,
   onDecrement,
   onReset,
+  disabled = false,
 }: CounterControlsProps): React.ReactElement => {
   return (
     <div className="flex flex-col items-center gap-4">
@@ -26,6 +27,7 @@ export const CounterControls = ({
           variant="outline"
           className="w-16 h-16 text-2xl font-bold"
           aria-label="Decrement counter"
+          disabled={disabled}
         >
           -
         </Button>
@@ -35,6 +37,7 @@ export const CounterControls = ({
           size="lg"
           className="w-16 h-16 text-2xl font-bold"
           aria-label="Increment counter"
+          disabled={disabled}
         >
           +
         </Button>
@@ -46,6 +49,7 @@ export const CounterControls = ({
         variant="ghost"
         size="sm"
         className="text-muted-foreground"
+        disabled={disabled}
       >
         Reset
       </Button>

@@ -50,3 +50,60 @@ export const createCountValue = (value: number): CountValue => {
   }
   return value as CountValue;
 };
+
+// =============================================================================
+// WebSocket Message Types
+// =============================================================================
+
+/**
+ * Client → Server: Action messages
+ * Pattern: typescript-patterns - Discriminated union for message types
+ */
+export type CounterAction =
+  | { readonly type: "increment" }
+  | { readonly type: "decrement" }
+  | { readonly type: "reset" };
+
+/**
+ * Server → Client: Sync message with current count
+ */
+export type CounterSync = {
+  readonly type: "sync";
+  readonly count: number;
+};
+
+/**
+ * All possible WebSocket messages
+ */
+export type CounterMessage = CounterAction | CounterSync;
+
+/**
+ * Type guard for CounterSync message
+ */
+export const isCounterSync = (message: unknown): message is CounterSync => {
+  return (
+    typeof message === "object" &&
+    message !== null &&
+    "type" in message &&
+    (message as CounterSync).type === "sync" &&
+    "count" in message &&
+    typeof (message as CounterSync).count === "number"
+  );
+};
+
+/**
+ * Connection status for shared counter
+ */
+export type ConnectionStatus = "disconnected" | "connecting" | "connected" | "error";
+
+/**
+ * Type guard for ConnectionStatus
+ */
+export const isConnectionStatus = (value: unknown): value is ConnectionStatus => {
+  return (
+    value === "disconnected" ||
+    value === "connecting" ||
+    value === "connected" ||
+    value === "error"
+  );
+};
