@@ -4,7 +4,13 @@
  */
 
 // Counter domain types
-export type { CountValue, CounterAction, CounterSync, CounterMessage, ConnectionStatus } from "./counter";
+export type {
+  CountValue,
+  CounterAction,
+  CounterSync,
+  CounterMessage,
+  ConnectionStatus,
+} from "./counter";
 export { isCountValue, createCountValue, isCounterSync, isConnectionStatus } from "./counter";
 
 // Component Props types

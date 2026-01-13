@@ -22,22 +22,13 @@ export type ConnectionIndicatorProps = {
 /**
  * Displays current WebSocket connection status
  */
-export const ConnectionIndicator = ({
-  status,
-}: ConnectionIndicatorProps): React.ReactElement => {
+export const ConnectionIndicator = ({ status }: ConnectionIndicatorProps): React.ReactElement => {
   const statusConfig = getStatusConfig(status);
 
   return (
     <div className="flex items-center gap-2">
-      <div
-        className={cn(
-          "w-2.5 h-2.5 rounded-full",
-          statusConfig.dotClass
-        )}
-      />
-      <span className="text-sm text-muted-foreground">
-        {statusConfig.label}
-      </span>
+      <div className={cn("w-2.5 h-2.5 rounded-full", statusConfig.dotClass)} />
+      <span className="text-sm text-muted-foreground">{statusConfig.label}</span>
     </div>
   );
 };

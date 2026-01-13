@@ -75,9 +75,7 @@ export const isPositive = (count: CountValue): boolean => {
  *   console.error(result.error.message);
  * }
  */
-export const parseCountInput = (
-  input: string
-): Result.Result<CountValue, Error> => {
+export const parseCountInput = (input: string): Result.Result<CountValue, Error> => {
   return Result.try({
     try: (): CountValue => {
       const trimmed = input.trim();
@@ -113,7 +111,7 @@ export const parseCountInput = (
 export const clampCount = (
   count: CountValue,
   min: number,
-  max: number
+  max: number,
 ): Result.Result<CountValue, Error> => {
   if (min > max) {
     return Result.fail(new Error(`Invalid bounds: min (${min}) > max (${max})`));

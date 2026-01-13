@@ -25,13 +25,13 @@ export const CounterDisplay = ({
           "w-48 h-48 rounded-2xl",
           "bg-counter-display text-counter-display-foreground",
           "border-2 border-counter-border",
-          "shadow-lg transition-colors duration-200"
+          "shadow-lg transition-colors duration-200",
         )}
       >
         <span
           className={cn(
             "text-7xl font-bold tabular-nums",
-            isPositive ? "text-counter-positive" : count < 0 ? "text-counter-negative" : ""
+            isPositive ? "text-counter-positive" : count < 0 ? "text-counter-negative" : "",
           )}
         >
           {count}
@@ -49,7 +49,7 @@ export const CounterDisplay = ({
           <span
             className={cn(
               "text-lg font-semibold",
-              isPositive ? "text-counter-positive" : "text-counter-negative"
+              isPositive ? "text-counter-positive" : "text-counter-negative",
             )}
           >
             {isPositive ? "Positive" : count < 0 ? "Negative" : "Zero"}

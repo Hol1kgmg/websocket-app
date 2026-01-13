@@ -101,9 +101,6 @@ export type ConnectionStatus = "disconnected" | "connecting" | "connected" | "er
  */
 export const isConnectionStatus = (value: unknown): value is ConnectionStatus => {
   return (
-    value === "disconnected" ||
-    value === "connecting" ||
-    value === "connected" ||
-    value === "error"
+    value === "disconnected" || value === "connecting" || value === "connected" || value === "error"
   );
 };

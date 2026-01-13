@@ -20,7 +20,7 @@
 # インタラクティブモード:
 # | nr              | スクリプト一覧を表示して選択 |
 {
-  description = "プロジェクト名:BrailleFinder";
+  description = "プロジェクト名:websocket(party-kit)のテンプレ";
 
   inputs = {
     flake-parts = {

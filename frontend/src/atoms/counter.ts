@@ -38,12 +38,9 @@ export const setCountAtom = atom(null, (_get, set, newCount: CountValue): void =
 /**
  * Pattern: jotai-state - Write-only atom for connection status
  */
-export const setConnectionStatusAtom = atom(
-  null,
-  (_get, set, status: ConnectionStatus): void => {
-    set(connectionStatusAtom, status);
-  }
-);
+export const setConnectionStatusAtom = atom(null, (_get, set, status: ConnectionStatus): void => {
+  set(connectionStatusAtom, status);
+});
 
 // =============================================================================
 // Derived Atoms (Computed Values)
