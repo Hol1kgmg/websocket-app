@@ -46,6 +46,9 @@ nix develop
 cd frontend
 ni
 
+# Setup environment variables
+cp .env.example .env.local
+
 # Start development server
 nr dev
 

@@ -29,7 +29,7 @@ import {
 // =============================================================================
 
 const WS_CONFIG = {
-  host: "localhost:1999",
+  host: process.env.NEXT_PUBLIC_PARTYKIT_HOST ?? "localhost:1999",
   room: "counter",
 } as const;
 
