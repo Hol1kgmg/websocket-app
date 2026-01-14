@@ -73,9 +73,32 @@ export type CounterSync = {
 };
 
 /**
+ * Server → Client: Connection info message
+ */
+export type ConnectionInfo = {
+  readonly type: "connection_info";
+  readonly currentConnections: number;
+  readonly maxConnections: number;
+};
+
+/**
+ * Server → Client: Error message
+ */
+export type ConnectionError = {
+  readonly type: "error";
+  readonly code: string;
+  readonly message: string;
+};
+
+/**
+ * All possible server messages
+ */
+export type ServerMessage = CounterSync | ConnectionInfo | ConnectionError;
+
+/**
  * All possible WebSocket messages
  */
-export type CounterMessage = CounterAction | CounterSync;
+export type CounterMessage = CounterAction | ServerMessage;
 
 /**
  * Type guard for CounterSync message
@@ -88,6 +111,38 @@ export const isCounterSync = (message: unknown): message is CounterSync => {
     (message as CounterSync).type === "sync" &&
     "count" in message &&
     typeof (message as CounterSync).count === "number"
+  );
+};
+
+/**
+ * Type guard for ConnectionInfo message
+ */
+export const isConnectionInfo = (message: unknown): message is ConnectionInfo => {
+  return (
+    typeof message === "object" &&
+    message !== null &&
+    "type" in message &&
+    (message as ConnectionInfo).type === "connection_info" &&
+    "currentConnections" in message &&
+    typeof (message as ConnectionInfo).currentConnections === "number" &&
+    "maxConnections" in message &&
+    typeof (message as ConnectionInfo).maxConnections === "number"
+  );
+};
+
+/**
+ * Type guard for ConnectionError message
+ */
+export const isConnectionError = (message: unknown): message is ConnectionError => {
+  return (
+    typeof message === "object" &&
+    message !== null &&
+    "type" in message &&
+    (message as ConnectionError).type === "error" &&
+    "code" in message &&
+    typeof (message as ConnectionError).code === "string" &&
+    "message" in message &&
+    typeof (message as ConnectionError).message === "string"
   );
 };
 

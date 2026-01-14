@@ -47,7 +47,7 @@ cd frontend
 ni
 
 # Setup environment variables
-cp .env.example .env.local
+cp .env.example .env
 
 # Start development server
 nr dev

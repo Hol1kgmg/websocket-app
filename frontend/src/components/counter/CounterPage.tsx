@@ -17,7 +17,18 @@ import { TypographyH1, TypographyLead } from "@/components/ui/typography";
  * Pattern: static-webapp-scaffold - Container component orchestrating domain logic
  */
 export const CounterPage = (): React.ReactElement => {
-  const { count, doubled, isPositive, status, increment, decrement, reset } = useCounter();
+  const {
+    count,
+    doubled,
+    isPositive,
+    status,
+    currentConnections,
+    maxConnections,
+    connectionError,
+    increment,
+    decrement,
+    reset,
+  } = useCounter();
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center gap-8 p-8">
@@ -30,7 +41,18 @@ export const CounterPage = (): React.ReactElement => {
       </header>
 
       {/* Connection status */}
-      <ConnectionIndicator status={status} />
+      <ConnectionIndicator
+        status={status}
+        currentConnections={currentConnections}
+        maxConnections={maxConnections}
+      />
+
+      {/* Connection error */}
+      {connectionError && (
+        <div className="px-4 py-2 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 rounded-md text-sm">
+          {connectionError}
+        </div>
+      )}
 
       {/* Counter display */}
       <CounterDisplay count={count} doubled={doubled} isPositive={isPositive} />

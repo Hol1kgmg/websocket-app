@@ -13,6 +13,8 @@ import { cn } from "@/lib/utils";
 
 export type ConnectionIndicatorProps = {
   readonly status: ConnectionStatus;
+  readonly currentConnections?: number;
+  readonly maxConnections?: number;
 };
 
 // =============================================================================
@@ -20,15 +22,27 @@ export type ConnectionIndicatorProps = {
 // =============================================================================
 
 /**
- * Displays current WebSocket connection status
+ * Displays current WebSocket connection status and connection count
  */
-export const ConnectionIndicator = ({ status }: ConnectionIndicatorProps): React.ReactElement => {
+export const ConnectionIndicator = ({
+  status,
+  currentConnections,
+  maxConnections,
+}: ConnectionIndicatorProps): React.ReactElement => {
   const statusConfig = getStatusConfig(status);
+  const showConnectionCount = currentConnections !== undefined && maxConnections !== undefined && maxConnections > 0;
 
   return (
-    <div className="flex items-center gap-2">
-      <div className={cn("w-2.5 h-2.5 rounded-full", statusConfig.dotClass)} />
-      <span className="text-sm text-muted-foreground">{statusConfig.label}</span>
+    <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2">
+        <div className={cn("w-2.5 h-2.5 rounded-full", statusConfig.dotClass)} />
+        <span className="text-sm text-muted-foreground">{statusConfig.label}</span>
+      </div>
+      {showConnectionCount && (
+        <span className="text-sm text-muted-foreground">
+          ({currentConnections}/{maxConnections})
+        </span>
+      )}
     </div>
   );
 };

@@ -17,8 +17,8 @@ cd frontend
 # PartyKitにログイン（初回のみ）
 npx partykit login
 
-# デプロイ
-npx partykit deploy
+# デプロイ（.envファイルの環境変数を含める）
+npx partykit deploy --with-vars
 ```
 
 デプロイ後、以下のようなURLが発行されます：
@@ -26,6 +26,14 @@ npx partykit deploy
 ```
 https://frontend-party.<your-username>.partykit.dev
 ```
+
+### PartyKit環境変数
+
+`.env` ファイルで以下の変数を設定できます：
+
+| 変数名 | 説明 | デフォルト |
+| ------ | ---- | --------- |
+| `MAX_CONNECTIONS` | ルームあたりの最大接続数 | 10 |
 
 ## 2. Cloudflare Pagesへのデプロイ
 
@@ -49,7 +57,7 @@ npx wrangler pages deploy out
 1. Cloudflare DashboardでGitHubリポジトリを連携
 1. ビルド設定：
    - Build command: `npm run build`
-   - Build output directory: `frontend/out`
+   - Build output directory: `out`
    - Root directory: `frontend`
 
 ## 3. 環境変数の設定

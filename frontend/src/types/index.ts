@@ -8,10 +8,20 @@ export type {
   CountValue,
   CounterAction,
   CounterSync,
+  ConnectionInfo,
+  ConnectionError,
+  ServerMessage,
   CounterMessage,
   ConnectionStatus,
 } from "./counter";
-export { isCountValue, createCountValue, isCounterSync, isConnectionStatus } from "./counter";
+export {
+  isCountValue,
+  createCountValue,
+  isCounterSync,
+  isConnectionInfo,
+  isConnectionError,
+  isConnectionStatus,
+} from "./counter";
 
 // Component Props types
 export type { CounterDisplayProps, CounterControlsProps } from "./components";

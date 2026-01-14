@@ -23,6 +23,21 @@ export const countAtom = atom<CountValue>(createCountValue(0));
  */
 export const connectionStatusAtom = atom<ConnectionStatus>("disconnected");
 
+/**
+ * Pattern: jotai-state - Primitive atom for current connection count
+ */
+export const currentConnectionsAtom = atom<number>(0);
+
+/**
+ * Pattern: jotai-state - Primitive atom for max connection limit
+ */
+export const maxConnectionsAtom = atom<number>(0);
+
+/**
+ * Pattern: jotai-state - Primitive atom for connection error message
+ */
+export const connectionErrorAtom = atom<string | null>(null);
+
 // =============================================================================
 // Write-Only Atoms (Actions)
 // =============================================================================
@@ -40,6 +55,24 @@ export const setCountAtom = atom(null, (_get, set, newCount: CountValue): void =
  */
 export const setConnectionStatusAtom = atom(null, (_get, set, status: ConnectionStatus): void => {
   set(connectionStatusAtom, status);
+});
+
+/**
+ * Pattern: jotai-state - Write-only atom for connection info
+ */
+export const setConnectionInfoAtom = atom(
+  null,
+  (_get, set, info: { currentConnections: number; maxConnections: number }): void => {
+    set(currentConnectionsAtom, info.currentConnections);
+    set(maxConnectionsAtom, info.maxConnections);
+  }
+);
+
+/**
+ * Pattern: jotai-state - Write-only atom for connection error
+ */
+export const setConnectionErrorAtom = atom(null, (_get, set, error: string | null): void => {
+  set(connectionErrorAtom, error);
 });
 
 // =============================================================================
