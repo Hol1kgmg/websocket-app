@@ -38,6 +38,16 @@ export const maxConnectionsAtom = atom<number>(0);
  */
 export const connectionErrorAtom = atom<string | null>(null);
 
+/**
+ * Pattern: jotai-state - Primitive atom for counter minimum limit
+ */
+export const minCountAtom = atom<number | null>(null);
+
+/**
+ * Pattern: jotai-state - Primitive atom for counter maximum limit
+ */
+export const maxCountAtom = atom<number | null>(null);
+
 // =============================================================================
 // Write-Only Atoms (Actions)
 // =============================================================================
@@ -65,7 +75,7 @@ export const setConnectionInfoAtom = atom(
   (_get, set, info: { currentConnections: number; maxConnections: number }): void => {
     set(currentConnectionsAtom, info.currentConnections);
     set(maxConnectionsAtom, info.maxConnections);
-  }
+  },
 );
 
 /**
@@ -74,6 +84,17 @@ export const setConnectionInfoAtom = atom(
 export const setConnectionErrorAtom = atom(null, (_get, set, error: string | null): void => {
   set(connectionErrorAtom, error);
 });
+
+/**
+ * Pattern: jotai-state - Write-only atom for counter limits
+ */
+export const setCounterLimitsAtom = atom(
+  null,
+  (_get, set, limits: { minCount: number; maxCount: number }): void => {
+    set(minCountAtom, limits.minCount);
+    set(maxCountAtom, limits.maxCount);
+  },
+);
 
 // =============================================================================
 // Derived Atoms (Computed Values)
@@ -101,4 +122,22 @@ export const isPositiveAtom = atom((get): boolean => {
  */
 export const isConnectedAtom = atom((get): boolean => {
   return get(connectionStatusAtom) === "connected";
+});
+
+/**
+ * Pattern: jotai-state - Derived atom to check if count is at minimum
+ */
+export const isAtMinAtom = atom((get): boolean => {
+  const count = get(countAtom);
+  const minCount = get(minCountAtom);
+  return minCount !== null && count <= minCount;
+});
+
+/**
+ * Pattern: jotai-state - Derived atom to check if count is at maximum
+ */
+export const isAtMaxAtom = atom((get): boolean => {
+  const count = get(countAtom);
+  const maxCount = get(maxCountAtom);
+  return maxCount !== null && count >= maxCount;
 });

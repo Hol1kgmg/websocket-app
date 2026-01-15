@@ -22,13 +22,18 @@ import {
   currentConnectionsAtom,
   maxConnectionsAtom,
   connectionErrorAtom,
+  minCountAtom,
+  maxCountAtom,
   doubledAtom,
   isPositiveAtom,
   isConnectedAtom,
+  isAtMinAtom,
+  isAtMaxAtom,
   setCountAtom,
   setConnectionStatusAtom,
   setConnectionInfoAtom,
   setConnectionErrorAtom,
+  setCounterLimitsAtom,
 } from "@/atoms/counter";
 
 // =============================================================================
@@ -64,6 +69,14 @@ export type UseCounterReturn = {
   readonly maxConnections: number;
   /** Connection error message */
   readonly connectionError: string | null;
+  /** Minimum counter value limit */
+  readonly minCount: number | null;
+  /** Maximum counter value limit */
+  readonly maxCount: number | null;
+  /** Whether count is at minimum limit */
+  readonly isAtMin: boolean;
+  /** Whether count is at maximum limit */
+  readonly isAtMax: boolean;
   /** Increment counter (sends to server) */
   readonly increment: () => void;
   /** Decrement counter (sends to server) */
@@ -98,12 +111,17 @@ export const useCounter = (): UseCounterReturn => {
   const currentConnections = useAtomValue(currentConnectionsAtom);
   const maxConnections = useAtomValue(maxConnectionsAtom);
   const connectionError = useAtomValue(connectionErrorAtom);
+  const minCount = useAtomValue(minCountAtom);
+  const maxCount = useAtomValue(maxCountAtom);
+  const isAtMin = useAtomValue(isAtMinAtom);
+  const isAtMax = useAtomValue(isAtMaxAtom);
 
   // Pattern: jotai-state - useSetAtom for write-only access
   const setCount = useSetAtom(setCountAtom);
   const setConnectionStatus = useSetAtom(setConnectionStatusAtom);
   const setConnectionInfo = useSetAtom(setConnectionInfoAtom);
   const setConnectionError = useSetAtom(setConnectionErrorAtom);
+  const setCounterLimits = useSetAtom(setCounterLimitsAtom);
 
   // Connect to server on mount
   useEffect(() => {
@@ -124,6 +142,10 @@ export const useCounter = (): UseCounterReturn => {
         const data: unknown = JSON.parse(String(event.data));
         if (isCounterSync(data)) {
           setCount(createCountValue(data.count));
+          setCounterLimits({
+            minCount: data.minCount,
+            maxCount: data.maxCount,
+          });
         } else if (isConnectionInfo(data)) {
           setConnectionInfo({
             currentConnections: data.currentConnections,
@@ -150,7 +172,7 @@ export const useCounter = (): UseCounterReturn => {
       socket.close();
       socketRef.current = null;
     };
-  }, [setConnectionStatus, setCount, setConnectionInfo, setConnectionError]);
+  }, [setConnectionStatus, setCount, setConnectionInfo, setConnectionError, setCounterLimits]);
 
   // Send action to server
   const sendAction = useCallback((action: CounterAction): void => {
@@ -180,6 +202,10 @@ export const useCounter = (): UseCounterReturn => {
     currentConnections,
     maxConnections,
     connectionError,
+    minCount,
+    maxCount,
+    isAtMin,
+    isAtMax,
     increment,
     decrement,
     reset,

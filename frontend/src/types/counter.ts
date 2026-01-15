@@ -65,11 +65,13 @@ export type CounterAction =
   | { readonly type: "reset" };
 
 /**
- * Server → Client: Sync message with current count
+ * Server → Client: Sync message with current count and limits
  */
 export type CounterSync = {
   readonly type: "sync";
   readonly count: number;
+  readonly minCount: number;
+  readonly maxCount: number;
 };
 
 /**
@@ -110,7 +112,11 @@ export const isCounterSync = (message: unknown): message is CounterSync => {
     "type" in message &&
     (message as CounterSync).type === "sync" &&
     "count" in message &&
-    typeof (message as CounterSync).count === "number"
+    typeof (message as CounterSync).count === "number" &&
+    "minCount" in message &&
+    typeof (message as CounterSync).minCount === "number" &&
+    "maxCount" in message &&
+    typeof (message as CounterSync).maxCount === "number"
   );
 };
 

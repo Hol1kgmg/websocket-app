@@ -25,6 +25,8 @@ export const CounterPage = (): React.ReactElement => {
     currentConnections,
     maxConnections,
     connectionError,
+    isAtMin,
+    isAtMax,
     increment,
     decrement,
     reset,
@@ -63,6 +65,8 @@ export const CounterPage = (): React.ReactElement => {
         onDecrement={decrement}
         onReset={reset}
         disabled={status !== "connected"}
+        disabledIncrement={isAtMax}
+        disabledDecrement={isAtMin}
       />
 
       {/* Pattern reference */}

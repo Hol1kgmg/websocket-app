@@ -9,6 +9,10 @@ import type { CounterAction, CounterSync, ConnectionInfo, ConnectionError } from
 /** Default maximum connections if not set in environment */
 const DEFAULT_MAX_CONNECTIONS = 10;
 
+/** Counter value limits */
+const MIN_COUNT = -100;
+const MAX_COUNT = 100;
+
 export default class Server implements Party.Server {
   /** Server-side counter state */
   private count: number = 0;
@@ -46,7 +50,12 @@ export default class Server implements Party.Server {
     }
 
     // Send current state to the new connection
-    const syncMessage: CounterSync = { type: "sync", count: this.count };
+    const syncMessage: CounterSync = {
+      type: "sync",
+      count: this.count,
+      minCount: MIN_COUNT,
+      maxCount: MAX_COUNT,
+    };
     conn.send(JSON.stringify(syncMessage));
 
     // Send connection info to the new connection
@@ -80,10 +89,10 @@ export default class Server implements Party.Server {
     // Update counter based on action
     switch (action.type) {
       case "increment":
-        this.count += 1;
+        this.count = Math.min(this.count + 1, MAX_COUNT);
         break;
       case "decrement":
-        this.count -= 1;
+        this.count = Math.max(this.count - 1, MIN_COUNT);
         break;
       case "reset":
         this.count = 0;
@@ -122,7 +131,12 @@ export default class Server implements Party.Server {
    * Broadcast current counter state to all connections
    */
   private broadcastSync(): void {
-    const syncMessage: CounterSync = { type: "sync", count: this.count };
+    const syncMessage: CounterSync = {
+      type: "sync",
+      count: this.count,
+      minCount: MIN_COUNT,
+      maxCount: MAX_COUNT,
+    };
     this.room.broadcast(JSON.stringify(syncMessage));
   }
 

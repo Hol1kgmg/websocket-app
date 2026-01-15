@@ -30,7 +30,8 @@ export const ConnectionIndicator = ({
   maxConnections,
 }: ConnectionIndicatorProps): React.ReactElement => {
   const statusConfig = getStatusConfig(status);
-  const showConnectionCount = currentConnections !== undefined && maxConnections !== undefined && maxConnections > 0;
+  const showConnectionCount =
+    currentConnections !== undefined && maxConnections !== undefined && maxConnections > 0;
 
   return (
     <div className="flex items-center gap-3">

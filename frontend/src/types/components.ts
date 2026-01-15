@@ -31,4 +31,8 @@ export type CounterControlsProps = {
   readonly onReset: () => void;
   /** Disable all controls (when disconnected) */
   readonly disabled?: boolean;
+  /** Disable increment button (when at max) */
+  readonly disabledIncrement?: boolean;
+  /** Disable decrement button (when at min) */
+  readonly disabledDecrement?: boolean;
 };
