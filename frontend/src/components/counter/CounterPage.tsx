@@ -51,7 +51,7 @@ export const CounterPage = (): React.ReactElement => {
 
       {/* Connection error */}
       {connectionError && (
-        <div className="px-4 py-2 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 rounded-md text-sm">
+        <div className="px-4 py-2 bg-destructive/10 text-destructive rounded-md text-sm">
           {connectionError}
         </div>
       )}
